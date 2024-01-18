@@ -31,5 +31,8 @@ class Kaart:
             return True
         else:
             return False
-    
+    def set(self, kaart2, kaart3):
+        return(self.verglijk_nummer(kaart2,kaart3) and self.verglijk_symbool(kaart2, kaart3) and self.verglijk_kleur(kaart2, kaart3) and self.verglijk_shading(kaart2, kaart3))
         
+        
+Kaart(0,0,0,1)
