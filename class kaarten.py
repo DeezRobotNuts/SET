@@ -31,10 +31,12 @@ class Kaart:
             return True
         else:
             return False
-    def set(self, kaart2, kaart3):
-        if (verglijk_nummer(self, kaart2 ,kaart3) == verglijk_symbool(self, kaart2, kaart3) == verglijk_kleur(self, kaart2, kaart3) == verglijk_shading(self, kaart2, kaart3)) == True:
+    def __eq__(self, kaart2, kaart3):
+        if verglijk_nummer(self, kaart2 ,kaart3) == verglijk_symbool(self, kaart2, kaart3) == verglijk_kleur(self, kaart2, kaart3) == verglijk_shading(self, kaart2, kaart3) == True:
             return True
-        else: 
+        else:
             return False
-        
+
+Kaart(0,0,0,1) == (Kaart(0,0,0,1), Kaart(0,0,0,1))
+  
         
