@@ -5,12 +5,14 @@ class Kaart:
         self.symbool = symbool
         self.kleur = kleur
         self.shading = shading
-        
-    def verglijk_nummer(self, kaart2, kaart3):
+     
+     #door deze functie worden de nummers van de kaarten  met elkaar vergleken, als ze hetzelfde zijn of ze zijn allemaal verschillend van elkaar dan gaat het returnen als true en anders is het false   
+    def verglijk_nummer(self, kaart2, kaart3): 
         if self.nummer == kaart2.nummer == kaart3.nummer or (self.nummer != kaart2.nummer and self.nummer != kaart3.nummer and kaart2.nummer != kaart3.nummer):
             return True
         else:
             return False
+        #door deze functie worden de symbolen van de kaarten met elkaar vergleken, als ze dezelfde zijn of ze zijn allemaal verschillend van elkaar dan gaat het returnen als true en anders is het false
     def verglijk_symbool(self, kaart2, kaart3):
         if self.symbool == kaart2.symbool == kaart3.symbool or (self.symbool != kaart2.symbool and self.symbool != kaart3.symbool and kaart2.symbool != kaart3.symbool):
             return True
@@ -23,5 +25,8 @@ class Kaart:
             return False
     
     def verglijk_shading(self, kaart2, kaart3):
-        self.shading == kaart2.shading == kaart3.shading or (self.shading != kaart2.shading and self.shading != kaart3.shading and kaart2.shading != kaart3.shading)
+        if self.shading == kaart2.shading == kaart3.shading or (self.shading != kaart2.shading and self.shading != kaart3.shading and kaart2.shading != kaart3.shading):
+            return True
+        else:
+            return False
         
