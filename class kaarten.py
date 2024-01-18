@@ -18,15 +18,18 @@ class Kaart:
             return True
         else:
             return False
+        #door deze functie worden de kleur van de kaarten met elkaar vergleken, als ze dezelfde zijn of ze zijn allemaal verschillend van elkaar dan gaat het returnen als true en anders is het false
     def verglijk_kleur(self, kaart2, kaart3):
         if self.kleur == kaart2.kleur == kaart3.kleur or (self.kleur != kaart2.kleur and self.kleur != kaart3.kleur and kaart2.kleur != kaart3.kleur):
             return True
         else: 
             return False
     
+    #door deze functie worden de shading van de kaarten met elkaar vergleken, als ze dezelfde zijn of ze zijn allemaal verschillend van elkaar dan gaat het returnen als true en anders is het false
     def verglijk_shading(self, kaart2, kaart3):
         if self.shading == kaart2.shading == kaart3.shading or (self.shading != kaart2.shading and self.shading != kaart3.shading and kaart2.shading != kaart3.shading):
             return True
         else:
             return False
+    
         
