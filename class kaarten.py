@@ -33,7 +33,7 @@ class Kaart:
             return False
     #hier checken we de 3kaarten en kijken of het uiteindelijke waarde true of false is, dit hebben we gedaan doormiddel van de functies met elkaar te verglijken, als alle 4 de functies waarde true geeft dan geeft deze functie ook de waarde true aan en anders geeft het false aan.
     def verglijk(self, kaart2, kaart3):
-        if self.verglijk_nummer(kaart2 ,kaart3) and self.verglijk_symbool(kaart2, kaart3) and self.verglijk_kleur(kaart2, kaart3) and self.verglijk_shading(kaart2, kaart3):
+        if verglijk_nummer(self, kaart2 ,kaart3) and self.verglijk_symbool(kaart2, kaart3) and self.verglijk_kleur(kaart2, kaart3) and self.verglijk_shading(kaart2, kaart3):
             return True
         else:
             return False
@@ -47,5 +47,10 @@ class Kaart:
 #print(card1.verglijk(card2, card3))
   
   
-
+ #we doen dit aan het einde als we tijd hebben en willen veranderen, we halen de functies uit class zelf en voegen __eq__ toe aan de class en alle 4 functies gaan uit de class, later gaan we met __eq__ de true en false doen, dit is aangeraden door een leeraar de andere leeraar zegt dat wat wij aan het doen zijn ook goed is.
+#def verglijk_nummer(kaart1, kaart2, kaart3): 
+     #if kaart1.a == kaart2.a == kaart3.a or (kaart1.a != kaart2.a and kaart1.a != kaart3.a and kaart2.a != kaart3.a):
+        #return True
+     #else:
+        #return False
         
