@@ -1,3 +1,5 @@
+from random import randrange as rndm
+
 def verglijk_nummer(kaart1, kaart2, kaart3): 
      if kaart1.nummer == kaart2.nummer == kaart3.nummer or (kaart1.nummer != kaart2.nummer and kaart1.nummer != kaart3.nummer and kaart2.nummer != kaart3.nummer):
         return True
@@ -65,3 +67,13 @@ def elkeSET(lijst):
         
 
 print(elkeSET(twaalfkaarten))
+
+#we moeten de bot een van de sets laten kiezen (het liefst eerste van de sets)
+def kiesSET():
+    n = 1
+    random(0,81)
+    a = elkeSET(twaalfkaarten)[r]
+    print(a)
+
+b = rndm(0,81)
+print(b)
