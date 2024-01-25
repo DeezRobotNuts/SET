@@ -1,5 +1,3 @@
-from random import randrange as rndm
-
 def verglijk_nummer(kaart1, kaart2, kaart3): 
      if kaart1.nummer == kaart2.nummer == kaart3.nummer or (kaart1.nummer != kaart2.nummer and kaart1.nummer != kaart3.nummer and kaart2.nummer != kaart3.nummer):
         return True
@@ -38,11 +36,11 @@ class Kaart:
         return "|{self.nummer}, {self.symbool}, {self.kleur}, {self.shading}|".format(self=self)
     def __repr__(self):
         return "|{self.nummer}, {self.symbool}, {self.kleur}, {self.shading}|".format(self=self)
-    #we kunnen mogelijk "==" betekenis geven voor onze class om de vergelijkfunctie wat eleganter te maken
+    #we kunnen mogelijk "==" betekenis geven voor onze class om de vergelijkfunctie wat eleganter te maken,
+    #het is ons alleen niet gelukt ongelijkheid van een attribuut transitief te maken van 2 kaarten naar alle drie: 
+    #(groen, paars, rood) gaat prima met (rood, groen) (paars, rood) (rood, paars), maar je krijgt problemen met bijv (rood, groen, rood),
     #def __eq__(self, kaart2):
-        #if self.nummer == kaart2.nummer and 
 
-        
         
 #twaalf handingevoerdekaarten voor het testen, later hebben we natuurlijk 12 wisselende kaarten
 K1, K2, K3, K4, K5, K6, K7, K8, K9, K10, K11, K12 = (Kaart(0,0,0,0), Kaart(1,2,2,1), Kaart(1,2,1,0), Kaart(2,1,0,0),Kaart(2,2,2,2),
@@ -50,11 +48,30 @@ K1, K2, K3, K4, K5, K6, K7, K8, K9, K10, K11, K12 = (Kaart(0,0,0,0), Kaart(1,2,2
 
 twaalfkaarten = [K1, K2, K3, K4, K5, K6, K7, K8, K9, K10, K11, K12]
 
+#we vinden hiermee alle SETs uit 12 willekeurige kaarten
 def elkeSET(lijst):
-    #voor nu een dict ipv een list voor de SETs, voor het geval we andere indices dan gewone getallen willen voor pygame (nog niet naar gekeken), ook meen ik dat dict intern sneller is
+    #voor nu een dict ipv een list voor de SETs, voor het geval we andere indices/keys dan gewone getallen willen
     SETs = {}
+    #het algoritme werkt voor n != 12, maar de tijdscomplexiteit van dit algoritme is O(n^3), het is namelijk een 3-dimensionaal driehoeksgetal (pyramidegetal?):
+    #dus mochten we supercomputers ooit tegen elkaar willen laten spelen met gigantisch veel kaarten met gigantisch veel eigenschappen (n <= 3^4 = 81 kan zo n <= 6^9 ~ 10E7 worden als je er geen jpg's aan hoeft te koppelen)
+    #moeten  we misschien iets beters bedenken
     n = len(lijst)
     teller = 0
+    #(dit kan misschien beter los in het verslag samen met mijn handgeschreven versie, maar voor jou @Yunus zet ik hier wat de tripel for loop doet):
+    #je vergelijkt de
+    #1ste kaart met de
+    #   2e - en
+    #       met de 3e t/m laatste -
+    #   3e - en
+    #       met de 4e t/m laatste -
+    #   ...
+    #   1 na laatste - en
+    #       met de laatste t/m laatste
+    #2e kaart met de...
+    #...
+    #2 na laatste met de
+    #   1 na laatste - en
+    #       met de laatste t/m laatste
     for i in range(0, n-2):
         for j in range(i+1, n-1):
             for k in range(j+1, n):
@@ -62,18 +79,8 @@ def elkeSET(lijst):
                     SETs[teller] = lijst[i], lijst[j], lijst[k]
                     teller += 1
                 else:
-                    pass #voor nu
+                    pass
     return SETs
         
 
 print(elkeSET(twaalfkaarten))
-
-#we moeten de bot een van de sets laten kiezen (het liefst eerste van de sets)
-def kiesSET():
-    n = 1
-    random(0,81)
-    a = elkeSET(twaalfkaarten)[r]
-    print(a)
-
-b = rndm(0,81)
-print(b)
