@@ -17,3 +17,5 @@ todo:
     -afbeeldingen koppelen aan vector/kaart;
   -nog meer (praktische) #opmerkingen
   -willekeurig één set kiezen
+
+(# erg naar dat als je deze anders dan README noemt hij niet meer automatisch op de homepagina staat)
