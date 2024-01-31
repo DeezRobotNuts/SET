@@ -9,13 +9,13 @@ donzo:
   -class voor kaarten;
   -vergelijkingsmethode voor drie kaarten;
   -algoritme voor het vinden van elke SET;
-  -meer #opmerkingen in de code:;
+  -meer #opmerkingen in de code;
+  -willekeurig één set kiezen
 
 todo:
   -verslag;
   -getallen koppelen aan eigenschappen, of direct omschrijvingen invoeren, bijv kaart(1,~,rd,0),
     -afbeeldingen koppelen aan vector/kaart;
   -nog meer (praktische) #opmerkingen
-  -willekeurig één set kiezen
 
 (# erg naar dat als je deze anders dan README noemt hij niet meer automatisch op de homepagina staat)
