@@ -1,3 +1,5 @@
+import pygame
+
 from random import randrange as rndm
 
 def verglijk_nummer(kaart1, kaart2, kaart3): 
@@ -100,6 +102,38 @@ def kiesSET(kaarten):
         a, b = SETs[r], showSETs[r]
         return a, b
 
-        
+#print(kiesSET(twaalfkaarten))
+      
+#pygame spul vanaf hier, aanzetten als je het spel test:
+pygame.init()
 
-print(kiesSET(twaalfkaarten))
+#Resulotie van het spel
+screen = pygame.display.set_mode([800,600])
+
+#voor willekeurige achtergrond kleur zonder epilepsie te krijgen moet dit buiten de running loop
+a, b, c = rndm(1,17), rndm(1,17), rndm(1,17)
+
+#zo kan het spel aan 
+running = True
+while running:
+
+    # Did the user click the window close button?
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    #achtergrond kleur
+    #a, b, c = 5, 13, 3 #voor mooi groene kleur, aangezien dit er één is kan het wel hier
+    screen.fill(((a**2 -1), (b**2 -1), (c**2 -1)))
+
+
+#ik weet niet waarom dit nodig is, maar zonder deze line zie je niets
+    pygame.display.flip()
+
+#deze om pygame.init weer af te sluiten
+pygame.quit()
+
+
+
+
+
