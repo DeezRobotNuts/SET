@@ -51,16 +51,17 @@ K1, K2, K3, K4, K5, K6, K7, K8, K9, K10, K11, K12 = (Kaart(0,0,0,0), Kaart(1,2,2
 twaalfkaarten = [K1, K2, K3, K4, K5, K6, K7, K8, K9, K10, K11, K12]
 
 #we vinden hiermee alle SETs uit 12 willekeurige kaarten
-def elkeSET(lijst):
-    #voor nu een dict ipv een list voor de SETs, voor het geval we andere indices/keys dan gewone getallen willen
+def elkeSET(kaarten):
+    #SETs onthoudt de plek van een SET, showSETs de kaarten zelf om dingen te testen
     SETs = {}
+    showSETs ={}
     #het algoritme werkt voor n != 12, maar de tijdscomplexiteit van dit algoritme is O(n^3), het is namelijk een 3-dimensionaal driehoeksgetal (pyramidegetal?):
     #dus mochten we supercomputers ooit tegen elkaar willen laten spelen met gigantisch veel kaarten met gigantisch veel eigenschappen (n <= 3^4 = 81 kan zo n <= 6^9 ~ 10E7 worden als je er geen jpg's aan hoeft te koppelen)
     #moeten  we misschien iets beters bedenken
-    n = len(lijst)
+    n = len(kaarten)
     teller = 0
     #(dit kan misschien beter los in het verslag samen met mijn handgeschreven versie, maar voor jou @Yunus zet ik hier wat de tripel for loop doet):
-    #je vergelijkt de
+    #vergelijk de:
     #1ste kaart met de
     #   2e - en
     #       met de 3e t/m laatste -
@@ -68,32 +69,37 @@ def elkeSET(lijst):
     #       met de 4e t/m laatste -
     #   ...
     #   1 na laatste - en
-    #       met de laatste t/m laatste
+    #       met de laatste - t/m laatste -
     #2e kaart met de...
     #...
-    #2 na laatste met de
+    #2 na laatste - met de
     #   1 na laatste - en
-    #       met de laatste t/m laatste
+    #       met de laatste - t/m laatste -
     for i in range(0, n-2):
         for j in range(i+1, n-1):
             for k in range(j+1, n):
-                if verglijk(lijst[i], lijst[j], lijst[k]) == True:
-                    SETs[teller] = lijst[i], lijst[j], lijst[k]
+                if verglijk(kaarten[i], kaarten[j], kaarten[k]) == True:
+                    showSETs[teller] = kaarten[i], kaarten[j], kaarten[k]
+                    SETs[teller] = i, j, k
                     teller += 1
                 else:
                     pass
-    return SETs
+    return SETs, showSETs
 
 
 #we moeten de bot een van de sets laten kiezen (het liefst eerste van de sets)
-def kiesSET():
-    n = 1
-    rndm(0,81)
-    a = elkeSET(twaalfkaarten)[r]
-    print(a)
+def kiesSET(kaarten):
+    SETs, showSETs = elkeSET(kaarten)
+    n = len(SETs)
+    if n == 0:
+        #we moeten er wel voor zorgen dat dit geen geldig antwoord is als de speler het invoert
+        #of juist een manier om "Cap set" in te voeren voor 2 punten, maar 2 punten voor de computer als er wel een SET is
+        return (0,1,2), (kaarten[0], kaarten[1], kaarten[2])
+    else:
+        r = rndm(0,n)
+        a, b = SETs[r], showSETs[r]
+        return a, b
 
-b = rndm(0,81)
-print(b)
         
 
-print(elkeSET(twaalfkaarten))
+print(kiesSET(twaalfkaarten))
