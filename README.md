@@ -1,4 +1,4 @@
-!GEBRUIK de nieuwe filenames!
+!Gebruik de nieuwe filenames!
 
 # SET
 Weggegaan van de standaardupdate branch, nu maken we telkens een tijdelijke branch per pull request, dit werkt prima aangezien we met zijn tweeën zijn en we voornamelijk aan één file werken, namelijk:
