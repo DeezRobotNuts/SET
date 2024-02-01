@@ -82,7 +82,7 @@ def en_nu_goed_om(boek):
             k2 = "g"
         elif k == 1:
             k2 = "p"
-        elif k2 == 2:
+        elif k == 2:
             k2 = "r"
         if sh == 0:
             sh2 = "()"
@@ -173,6 +173,7 @@ scherm = pygame.display.set_mode((breed, hoog))
 #voor willekeurige achtergrond kleur zonder epilepsie te krijgen moet dit buiten de running loop
 r0, g0, b0 = rndm(1,16), rndm(1,16), rndm(1,16)
 
+#het onderstaande verwijdert de meest oogverblindende kleuren
 def goedgekleurd(r,g,b):
     if (((r == g == 14 or r == b == 14 or g == b == 14) == False) and
     ((r > 14 or g >14  or b > 14) and (22 > r+g+b or r+g+b > 30)) == False):
@@ -182,9 +183,11 @@ while goedgekleurd(r0, g0, b0) != True:
     r0, g0, b0 = rndm(1,16), rndm(1,16), rndm(1,16)
 
 rd, gr, bl = r0**2 - 1, g0**2 - 1, b0**2 - 1
+
+#zo zijn de dummyrechthoeken waar de kaarten op komen altijd zichtbaar
 rd1, gr1, bl1 = (255 - rd), (255 - gr), (255 - bl)
 
-#z 
+#start het spel
 lekkerspelen = True
 while lekkerspelen:
 
