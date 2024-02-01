@@ -157,11 +157,11 @@ def kiesSET(kaarten):
         return a, b
 
       
-#deze toetsen wil ik graag om de kaarten in te voeren, 12 plekken, 12 kaarten
-from pygame.locals import (K_1, K_2, K_3,
-                           K_q, K_w, K_e,
-                           K_a, K_s, K_d,
-                           K_z, K_x, K_c)
+#deze toetsen wil ik graag om de kaarten in te voeren, paar extra om uit te vinden wat goed voelt
+from pygame.locals import (K_1, K_2, K_3, K_4,
+                           K_q, K_w, K_e, K_r,
+                           K_a, K_s, K_d, K_f,
+                           K_z, K_x, K_c, K_v)
 
 #zo kan de module starten met shit doen
 pygame.init()
@@ -191,24 +191,26 @@ rd1, gr1, bl1 = (255 - rd), (255 - gr), (255 - bl)
 lekkerspelen = True
 while lekkerspelen:
 
-    #sluit de spel-loop als je het venster sluit
+    #events
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+        #hier kan mogelijk toetsenbord input
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                lekkerspelen == False
+        #sluit het spel 
+        elif event.type == pygame.QUIT:
             lekkerspelen = False
-
+    #hier kan ook toetsenbord input
+    toetsinvoer = pygame.key.get_pressed()
+    
+    
     #achtergrond kleur
     #a, b, c = 5, 13, 3 #voor mooi groene kleur, aangezien dit er één is kan het wel hier
     scherm.fill(((rd, gr, bl)))
     
-    kaarthoeken = [Rect(40 + 100*i, 20, 90, 160) for i in range(12)]
-    
+    kaarthoeken = [Rect(40 + 100*i, 40 + 240*(i % 3), 90, 160) for i in range(12)]
     for rechthoek in kaarthoeken:
         pygame.draw.rect(scherm, (rd1, gr1, bl1), rechthoek)
-    
-    #pygame.key.get_pressed()
-    #invoervak = pygame.Rect()
-    #pygame.key.set_text_input_rect(invoervak)
-   
     
     #zonder deze line zie je niets
     pygame.display.flip()
