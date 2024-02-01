@@ -1,6 +1,11 @@
 import pygame
 from pygame import Rect
-
+#deze toetsen wil ik graag om de kaarten in te voeren, paar extra om uit te vinden wat goed voelt
+from pygame.locals import (K_1, K_2, K_3, K_4,
+                           K_q, K_w, K_e, K_r,
+                           K_a, K_s, K_d, K_f,
+                           K_z, K_x, K_c, K_v)
+import random
 from random import randrange as rndm
 from random import shuffle
 
@@ -133,16 +138,6 @@ def elkeSET(kaarten):
                     pass
     return SETs, showSETs
 
-#test of alle kaarten het doen met een willekeurige shuffle van het deck
-kaartgoed, kaartalternatief, kaartlijst, alterlijst = en_nu_goed_om(kaart_eigenschappen)
-#je kan ook "kaartlijst" gebruiken
-testkaartm = [alterlijst[i] for i in range(81)]
-shuffle(testkaartm)
-jnfo, keesbaarantwoord = elkeSET(testkaartm[:12])
-for i in range(len(keesbaarantwoord)):
-    a, b, c = keesbaarantwoord[i]
-    print(" {} \n {} \n {} \n ...".format(a, b, c))
-
 #we moeten de bot een van de sets laten kiezen (het liefst eerste van de sets)
 def kiesSET(kaarten):
     SETs, showSETs = elkeSET(kaarten)
@@ -155,18 +150,23 @@ def kiesSET(kaarten):
         r = rndm(0,n)
         a, b = SETs[r], showSETs[r]
         return a, b
+    
+"""(dit nu niet nodig maar wel fundamenteel om bij de hand te hebben)
+#test of alle kaarten het doen met een willekeurige shuffle van het deck
+kaartgoed, kaartalternatief, kaartlijst, alterlijst = en_nu_goed_om(kaart_eigenschappen)
+#je kan ook "kaartlijst" gebruiken
 
-      
-#deze toetsen wil ik graag om de kaarten in te voeren, paar extra om uit te vinden wat goed voelt
-from pygame.locals import (K_1, K_2, K_3, K_4,
-                           K_q, K_w, K_e, K_r,
-                           K_a, K_s, K_d, K_f,
-                           K_z, K_x, K_c, K_v)
+testkaartm = [alterlijst[i] for i in range(81)]
+shuffle(testkaartm)
+jnfo, keesbaarantwoord = elkeSET(testkaartm[:12])
+for i in range(len(keesbaarantwoord)):
+    a, b, c = keesbaarantwoord[i]
+    print(" {} \n {} \n {} \n ...".format(a, b, c))"""
 
 #zo kan de module starten met shit doen
 pygame.init()
 
-#Resulotie van het spel
+#Resolutie van het spelscherm
 breed, hoog = 1280, 720
 scherm = pygame.display.set_mode((breed, hoog))
 
@@ -178,14 +178,35 @@ def goedgekleurd(r,g,b):
     if (((r == g == 14 or r == b == 14 or g == b == 14) == False) and
     ((r > 14 or g >14  or b > 14) and (22 > r+g+b or r+g+b > 30)) == False):
             return True
-
+        
 while goedgekleurd(r0, g0, b0) != True:
     r0, g0, b0 = rndm(1,16), rndm(1,16), rndm(1,16)
 
 rd, gr, bl = r0**2 - 1, g0**2 - 1, b0**2 - 1
-
 #zo zijn de dummyrechthoeken waar de kaarten op komen altijd zichtbaar
-rd1, gr1, bl1 = (255 - rd), (255 - gr), (255 - bl)
+(rd1, gr1, bl1) = (255 - rd), (255 - gr), (255 - bl)
+
+#gebruik één van de twee dict/lijstcombos
+kaartdict, altdict, kaartlijst, altlijst = en_nu_goed_om(kaart_eigenschappen)
+
+#ons probeersel om de kaart class van eerder op het spelbord te krijgen
+class Grid(pygame.sprite.Sprite):
+    def __init__(self, positie, kleur):
+        pygame.sprite.Sprite.__init__(self)
+    #hier kunnen we de kaartafbeeldingen doen
+        self.positie = positie
+        self.kleur = kleur
+        self.vlak = pygame.Surface([90, 160])
+        self.plek = self.vlak.get_rect(left=(40 + 100*self.positie)
+                                       ,top = (40 + 240*(self.positie % 3)))
+        #een self.kaart die een van de kaarten pakt?
+        self.kaart = altlijst[rndm(81)]
+
+        self.vlak.fill(self.kleur)
+        #self.plaatje = pygame.image.load(altdict[self.kaart]).convert()
+        #self.plaatje.set_colorkey(("white"), pygame.RLEACCEL)
+        
+grid = [Grid(i, (rd1, gr1, bl1)) for i in range(12)]
 
 #start het spel
 lekkerspelen = True
@@ -203,15 +224,17 @@ while lekkerspelen:
     #hier kan ook toetsenbord input
     toetsinvoer = pygame.key.get_pressed()
     
-    
     #achtergrond kleur
     #a, b, c = 5, 13, 3 #voor mooi groene kleur, aangezien dit er één is kan het wel hier
     scherm.fill(((rd, gr, bl)))
     
+    """
     kaarthoeken = [Rect(40 + 100*i, 40 + 240*(i % 3), 90, 160) for i in range(12)]
     for rechthoek in kaarthoeken:
         pygame.draw.rect(scherm, (rd1, gr1, bl1), rechthoek)
-    
+    """
+    for n in range(len(grid)):
+        scherm.blit(grid[n].vlak, grid[n].plek)
     #zonder deze line zie je niets
     pygame.display.flip()
 
