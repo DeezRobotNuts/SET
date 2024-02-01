@@ -119,7 +119,7 @@ def elkeSET(kaarten):
     #       met de 3e t/m laatste -
     #   3e - en
     #       met de 4e t/m laatste -
-    #   ...
+    #   ...pygame.image.load('C:\\Users\\yunus\\Downloads\\kaarten\\kaarten\\greendiamondempty1.gif')
     #   1 na laatste - en
     #       met de laatste - t/m laatste -
     #2e kaart met de...
@@ -196,15 +196,22 @@ class Grid(pygame.sprite.Sprite):
     #hier kunnen we de kaartafbeeldingen doen
         self.positie = positie
         self.kleur = kleur
-        self.vlak = pygame.Surface([90, 160])
-        self.plek = self.vlak.get_rect(left=(40 + 100*self.positie)
-                                       ,top = (40 + 240*(self.positie % 3)))
-        #een self.kaart die een van de kaarten pakt?
+        
+        #totdat de plaatjes werken
+        #self.vlak = pygame.Surface([90, 160])
+        #self.vlak.fill(self.kleur)
+        
         self.kaart = altlijst[rndm(81)]
+        
+        self.plaatje = pygame.image.load(altdict[self.kaart]).convert()
+        self.plaatje.set_colorkey((self.kleur), pygame.RLEACCEL)
+        
+        self.plek = self.plaatje.get_rect(left=(40 + 100*self.positie)
+                                       ,top = (20 + 240*(self.positie % 3)))
+        #een self.kaart die een van de kaarten pakt?
+   
+        
 
-        self.vlak.fill(self.kleur)
-        #self.plaatje = pygame.image.load(altdict[self.kaart]).convert()
-        #self.plaatje.set_colorkey(("white"), pygame.RLEACCEL)
         
 grid = [Grid(i, (rd1, gr1, bl1)) for i in range(12)]
 
@@ -234,7 +241,7 @@ while lekkerspelen:
         pygame.draw.rect(scherm, (rd1, gr1, bl1), rechthoek)
     """
     for n in range(len(grid)):
-        scherm.blit(grid[n].vlak, grid[n].plek)
+        scherm.blit(grid[n].plaatje, grid[n].plek)
     #zonder deze line zie je niets
     pygame.display.flip()
 
