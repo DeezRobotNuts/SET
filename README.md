@@ -21,3 +21,9 @@ todo:
   nog meer (praktische) #opmerkingen
 
 (erg naar dat als je deze anders dan README noemt hij niet meer automatisch op de homepagina staat)
+
+# Create custom events for adding a new enemy and a cloud
+ADDENEMY = pygame.USEREVENT + 1
+pygame.time.set_timer(ADDENEMY, 250)
+ADDCLOUD = pygame.USEREVENT + 2
+pygame.time.set_timer(ADDCLOUD, 1000)
