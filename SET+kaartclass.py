@@ -2,6 +2,7 @@ import pygame
 from pygame import Rect
 
 from random import randrange as rndm
+from random import shuffle
 
 def verglijk_nummer(kaart1, kaart2, kaart3): 
      if kaart1.nummer == kaart2.nummer == kaart3.nummer or (kaart1.nummer != kaart2.nummer and kaart1.nummer != kaart3.nummer and kaart2.nummer != kaart3.nummer):
@@ -44,32 +45,57 @@ class Kaart:
     #we kunnen mogelijk "==" betekenis geven voor onze class om de vergelijkfunctie wat eleganter te maken,
 
 #hier de handingevoerde kaarten en het werk om ze daadwerkelijk tot de bruikbare class te maken, om te laten zien dat we niet op onze reet hebben gezeten mocht het niet afkomen
+class Kaart:
+    def __init__(self, nummer, symbool, kleur, shading):
+        self.nummer, self.symbool, self.kleur, self.shading = nummer, symbool, kleur, shading    
+    def __str__(self):
+        return "|{self.nummer}, {self.symbool}, {self.kleur}, {self.shading}|".format(self=self)
+    def __repr__(self):
+        return "|{self.nummer}, {self.symbool}, {self.kleur}, {self.shading}|".format(self=self)
+    #we kunnen mogelijk "==" betekenis geven voor onze class om de vergelijkfunctie wat eleganter te maken,
+
+#hier de eerst fout ingevoerde kaarten en het werk om ze daadwerkelijk tot de bruikbare class te maken, om te laten zien dat we niet op onze reet hebben gezeten mocht het niet afkomen
 kaart_eigenschappen = {
         'greendiamondempty1.gif': (0,0,0,0), 'greendiamondempty2.gif':(1,0,0,0), 'greendiamondempty3.gif': (2,0,0,0), 'greendiamondfilled1.gif': (0,0,0,1), 'greendiamondfilled2.gif': (1,0,0,1), 'greendiamondfilled3.gif': (2,0,0,1), 'greendiamondshaded1.gif': (0,0,0,2), 'greendiamondshaded2.gif': (1,0,0,2), 'greendiamondshaded3.gif': (2,0,0,2), 'greenovalempty1.gif': (0,1,0,0), 'greenovalempty2.gif': (1,1,0,0), 'greenovalempty3.gif': (2,1,0,0), 'greenovalfilled1.gif': (0,1,0,1), 'greenovalfilled2.gif': (1,1,0,1), 'greenovalfilled3.gif': (2,1,0,1), 'greenovalshaded1.gif': (0,1,0,2), 'greenovalshaded2.gif': (1,1,0,2), 'greenovalshaded3.gif': (2,1,0,2), 'greensquiggleempty1.gif': (0,2,0,0), 'greensquiggleempty2.gif': (1,2,0,0), 'greensquiggleempty3.gif': (2,2,0,0), 'greensquigglefilled1.gif': (0,2,0,1), 'greensquigglefilled2.gif': (1,2,0,1), 'greensquigglefilled3.gif': (2,2,0,1), 'greensquiggleshaded1.gif': (0,2,0,2), 'greensquiggleshaded2.gif': (1,2,0,2), 'greensquiggleshaded3.gif': (2,2,0,2),
         'purplediamondempty1.gif': (0,0,1,0), 'purplediamondempty2.gif': (1,0,1,0), 'purplediamondempty3.gif': (2,0,1,0), 'purplediamondfilled1.gif': (0,0,1,1), 'purplediamondfilled2.gif': (1,0,1,1), 'purplediamondfilled3.gif': (2,0,1,1), 'purplediamondshaded1.gif': (0,0,1,2), 'purplediamondshaded2.gif': (1,0,1,2), 'purplediamondshaded3.gif': (2,0,1,2), 'purpleovalempty1.gif': (0,1,1,0), 'purpleovalempty2.gif': (1,1,1,0), 'purpleovalempty3.gif': (2,1,1,0), 'purpleovalfilled1.gif': (0,1,1,1), 'purpleovalfilled2.gif': (1,1,1,1), 'purpleovalfilled3.gif': (2,1,1,1), 'purpleovalshaded1.gif': (0,1,1,2), 'purpleovalshaded2.gif': (1,1,1,2), 'purpleovalshaded3.gif': (2,1,1,2), 'purplesquiggleempty1.gif': (0,2,1,0), 'purplesquiggleempty2.gif': (1,2,1,0), 'purplesquiggleempty3.gif': (2,2,1,0), 'purplesquigglefilled1.gif': (0,2,1,1), 'purplesquigglefilled2.gif': (1,2,1,1), 'purplesquigglefilled3.gif': (2,2,1,1), 'purplesquiggleshaded1.gif': (0,2,1,2), 'purplesquiggleshaded2.gif': (1,2,1,2), 'purplesquiggleshaded3.gif': (2,2,1,2), 'reddiamondempty1.gif': (0,0,2,0), 'reddiamondempty2.gif': (1,0,2,0), 'reddiamondempty3.gif': (2,0,2,0), 'reddiamondfilled1.gif': (0,0,2,1), 'reddiamondfilled2.gif': (1,0,2,1), 'reddiamondfilled3.gif': (2,0,2,1), 'reddiamondshaded1.gif': (0,0,2,2), 'reddiamondshaded2.gif': (1,0,2,2), 'reddiamondshaded3.gif': (2,0,2,2), 'redovalempty1.gif': (0,1,2,0), 'redovalempty2.gif': (1,1,2,0), 'redovalempty3.gif': (2,1,2,0), 'redovalfilled1.gif': (0,1,2,1), 'redovalfilled2.gif': (1,1,2,1), 'redovalfilled3.gif': (2,1,2,1), 'redovalshaded1.gif': (0,1,2,2), 'redovalshaded2.gif': (1,1,2,2), 'redovalshaded3.gif': (2,1,2,2),
         'redsquiggleempty1.gif': (0,2,2,0), 'redsquiggleempty2.gif': (1,2,2,0), 'redsquiggleempty3.gif': (2,2,2,0), 'redsquigglefilled1.gif': (0,2,2,1), 'redsquigglefilled2.gif': (1,2,2,1), 'redsquigglefilled3.gif': (2,2,2,1), 'redsquiggleshaded1.gif': (0,2,2,2), 'redsquiggleshaded2.gif': (1,2,2,2), 'redsquiggleshaded3.gif': (2,2,2,2)}
 
-alternatieve_tuple = {}
-
-kaartn = kaart_eigenschappen.values()
-
 def en_nu_goed_om(boek):
     kaartmitplaatje = {}
+    kaartvolgorde = []
+    alternatief = {}
+    altvolg = []
     for naam_gif in boek:
         vector = boek[naam_gif]
-        kaart = Kaart(vector)
+        n, v, k, sh = vector
+        kaart = Kaart(n, v, k, sh)
         kaartmitplaatje[kaart] = naam_gif
-    return kaartmitplaatje
-    
-kaart_eigenschappen_goed = en_nu_goed_om(kaart_eigenschappen)
-for i in kaarteigengeschappen
+        kaartvolgorde.append(kaart)
+        #hier voor de tweede visualiesatiemethode:
+        if v == 0:
+            v2 = "\u25b2"
+        elif v == 1:
+            v2 = "\u2B2D"
+        elif v == 2:
+            v2 = "~"
+        if k == 0:
+            k2 = "g"
+        elif k == 1:
+            k2 = "p"
+        elif k2 == 2:
+            k2 = "r"
+        if sh == 0:
+            sh2 = "()"
+            #@yunus het doet pijn aan mijn hart te zien dat je shaded niet tussen open en dicht hebt gedaan
+        elif sh == 1:
+            sh2 = "]["
+        elif sh == 2:
+            sh2 = "//"
+        kaart2 = Kaart((n+1), v2, k2, sh2)
+        alternatief[kaart2] = naam_gif
+        altvolg.append(kaart2)
+    return kaartmitplaatje, alternatief, kaartvolgorde, altvolg
 
-        
-#twaalf handingevoerdekaarten voor het testen, later hebben we natuurlijk 12 wisselende kaarten
-K1, K2, K3, K4, K5, K6, K7, K8, K9, K10, K11, K12 = (Kaart(0,0,0,0), Kaart(1,2,2,1), Kaart(1,2,1,0), Kaart(2,1,0,0),Kaart(2,2,2,2),
-                                                     Kaart(1,1,2,1), Kaart(1,0,0,0), Kaart(2,1,2,1), Kaart(0,2,2,2), Kaart(1,1,1,0), Kaart(1,0,2,0), Kaart(0,2,0,1))
-
-twaalfkaarten = [K1, K2, K3, K4, K5, K6, K7, K8, K9, K10, K11, K12]
 
 #we vinden hiermee alle SETs uit 12 willekeurige kaarten
 def elkeSET(kaarten):
@@ -107,6 +133,15 @@ def elkeSET(kaarten):
                     pass
     return SETs, showSETs
 
+#test of alle kaarten het doen met een willekeurige shuffle van het deck
+kaartgoed, kaartalternatief, kaartlijst, alterlijst = en_nu_goed_om(kaart_eigenschappen)
+#je kan ook "kaartlijst" gebruiken
+testkaartm = [alterlijst[i] for i in range(81)]
+shuffle(testkaartm)
+jnfo, keesbaarantwoord = elkeSET(testkaartm[:12])
+for i in range(len(keesbaarantwoord)):
+    a, b, c = keesbaarantwoord[i]
+    print(" {} \n {} \n {} \n ...".format(a, b, c))
 
 #we moeten de bot een van de sets laten kiezen (het liefst eerste van de sets)
 def kiesSET(kaarten):
