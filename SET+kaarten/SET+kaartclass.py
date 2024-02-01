@@ -176,7 +176,7 @@ r0, g0, b0 = rndm(1,16), rndm(1,16), rndm(1,16)
 #het onderstaande verwijdert de meest oogverblindende kleuren
 def goedgekleurd(r,g,b):
     if (((r == g == 14 or r == b == 14 or g == b == 14) == False) and
-    ((r > 14 or g >14  or b > 14) and (22 > r+g+b or r+g+b > 30)) == False):
+    ((r > 14 or g >14  or b > 14) and (22 > r+g+b or r+g+b >28)) == False):
             return True
         
 while goedgekleurd(r0, g0, b0) != True:
@@ -206,7 +206,7 @@ class Grid(pygame.sprite.Sprite):
         self.plaatje = pygame.image.load(altdict[self.kaart]).convert()
         self.plaatje.set_colorkey((self.kleur), pygame.RLEACCEL)
         
-        self.plek = self.plaatje.get_rect(left=(40 + 100*self.positie)
+        self.plek = self.plaatje.get_rect(left=(95 + 90*self.positie)
                                        ,top = (20 + 240*(self.positie % 3)))
         #een self.kaart die een van de kaarten pakt?
    
@@ -231,15 +231,11 @@ while lekkerspelen:
     #hier kan ook toetsenbord input
     toetsinvoer = pygame.key.get_pressed()
     
+    
     #achtergrond kleur
-    #a, b, c = 5, 13, 3 #voor mooi groene kleur, aangezien dit er één is kan het wel hier
+    #rd, gr, bl = 5, 13, 3 #voor mooi groene kleur, aangezien dit er één is kan het wel hier
     scherm.fill(((rd, gr, bl)))
     
-    """
-    kaarthoeken = [Rect(40 + 100*i, 40 + 240*(i % 3), 90, 160) for i in range(12)]
-    for rechthoek in kaarthoeken:
-        pygame.draw.rect(scherm, (rd1, gr1, bl1), rechthoek)
-    """
     for n in range(len(grid)):
         scherm.blit(grid[n].plaatje, grid[n].plek)
     #zonder deze line zie je niets
