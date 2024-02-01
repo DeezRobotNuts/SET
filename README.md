@@ -1,7 +1,7 @@
-!Gebruik de nieuwe filenames!
-
 # SET
-Weggegaan van de standaardupdate branch, nu maken we telkens een tijdelijke branch per pull request, dit werkt prima aangezien we met zijn tweeën zijn en we voornamelijk aan één file werken, namelijk:
+Ik ga een class proberen te maken voor de 12 plekken op "tafel" die geselecteerd kunnen worden, en die zelf een eigenschap hebben waar ze de Kaart-class in bewaren, misschien kan je ook kijken naar hoe je daar de plaatjes in krijgt?
+
+De main file is nu alleen nog
   SET+kaartclass.py
 
 Het fractions bestand zit er alleen in om weer even een idee te hebben van dingen die je met een class kan doen.
