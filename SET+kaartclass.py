@@ -1,4 +1,5 @@
 import pygame
+from pygame import Rect
 
 from random import randrange as rndm
 
@@ -102,33 +103,61 @@ def kiesSET(kaarten):
         a, b = SETs[r], showSETs[r]
         return a, b
 
-#print(kiesSET(twaalfkaarten))
       
-#pygame spul vanaf hier, aanzetten als je het spel test:
+#pygame spul vanaf hier
+from pygame.locals import (K_1, K_2, K_3,
+                           K_q, K_w, K_e,
+                           K_a, K_s, K_d,
+                           K_z, K_x, K_c)
+
+#zo kan de module starten met shit doen
 pygame.init()
 
 #Resulotie van het spel
-screen = pygame.display.set_mode([800,600])
+breed, hoog = 1280, 720
+scherm = pygame.display.set_mode((breed, hoog))
 
 #voor willekeurige achtergrond kleur zonder epilepsie te krijgen moet dit buiten de running loop
-a, b, c = rndm(1,17), rndm(1,17), rndm(1,17)
+r0, g0, b0 = rndm(1,16), rndm(1,16), rndm(1,16)
 
-#zo kan het spel aan 
-running = True
-while running:
+def goedgekleurd(r,g,b):
+    if (((r == g == 14 or r == b == 14 or g == b == 14) == False) and
+    ((r > 14 or g >14  or b > 14) and (22 > r+g+b or r+g+b > 30)) == False):
+            return True
 
-    # Did the user click the window close button?
+while goedgekleurd(r0, g0, b0) != True:
+    r0, g0, b0 = rndm(1,16), rndm(1,16), rndm(1,16)
+
+rd, gr, bl = r0**2 - 1, g0**2 - 1, b0**2 - 1
+
+rd1, gr1, bl1 = (255 - rd), (255 - gr), (255 - bl)
+
+#z 
+lekkerspelen = True
+while lekkerspelen:
+
+    #sluit de spel-loop als je het venster sluit
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            running = False
+            lekkerspelen = False
 
     #achtergrond kleur
     #a, b, c = 5, 13, 3 #voor mooi groene kleur, aangezien dit er één is kan het wel hier
-    screen.fill(((a**2 -1), (b**2 -1), (c**2 -1)))
-
-
-#ik weet niet waarom dit nodig is, maar zonder deze line zie je niets
+    scherm.fill(((rd, gr, bl)))
+    
+    kaarthoeken = [Rect(40 + 100*i, 20, 90, 160) for i in range(12)]
+    
+    for rechthoek in kaarthoeken:
+        pygame.draw.rect(scherm, (rd1, gr1, bl1), rechthoek)
+    
+    #pygame.key.get_pressed()
+    #invoervak = pygame.Rect()
+    #pygame.key.set_text_input_rect(invoervak)
+   
+    
+    #zonder deze line zie je niets
     pygame.display.flip()
+
 
 #deze om pygame.init weer af te sluiten
 pygame.quit()
