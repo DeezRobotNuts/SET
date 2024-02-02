@@ -14,7 +14,7 @@ def verglijk_nummer(kaart1, kaart2, kaart3):
         return True
      else:
         return False
-
+#de notequal delen kunnen natuurlijk veel sneller door gewoon een laatste ongelijkheid achter twee ongelijkheden te zetten, maar ja het staat er nu toch al zo
 def verglijk_symbool(kaart1, kaart2, kaart3): 
      if (kaart1.symbool == kaart2.symbool == kaart3.symbool or 
          (kaart1.symbool != kaart2.symbool and kaart1.symbool != kaart3.symbool and kaart2.symbool != kaart3.symbool)):
@@ -133,9 +133,7 @@ def kiesSET(kaarten):
     SETs, showSETs = elkeSET(kaarten)
     n = len(SETs)
     if n == 0:
-        #we moeten er wel voor zorgen dat dit geen geldig antwoord is als de speler het invoert
-        #of juist een manier om "Cap set" in te voeren voor 2 punten, maar 2 punten voor de computer als er wel een SET is
-        return (0,1,2), (kaarten[0], kaarten[1], kaarten[2])
+        return "CAP"
     else:
         r = rndm(0,n)
         a, b = SETs[r], showSETs[r]
@@ -198,7 +196,7 @@ class Grid(pygame.sprite.Sprite):
                                        ,top = (20 + 240*(self.rij)))
         self.gekozen = False
         
-        
+#deze class is niet af en het moet nu echt ingeleverd, maar wie weet klooien we er later nog mee dus laat'n we hem blijven
 class textinput(pygame.sprite.Sprite):
     def __init__(self, kleur):
         self.kleur = kleur
@@ -215,10 +213,11 @@ class textinput(pygame.sprite.Sprite):
         
 grid = [Grid(i, (rd1, gr1, bl1)) for i in range(12)]
 
-lijst = []
+# dit is om te testen of de invoer werkt, maar niet valsspelen: laat het zo tijdens het spelen
+"""lijst = []
 for i in range(12):
     lijst.append(grid[i].kaart)
-print(elkeSET(lijst))
+print(elkeSET(lijst))"""
 
 #timer
 timer = Timer(scherm, positie=(25,650))
@@ -226,7 +225,7 @@ timer_spel = pygame.USEREVENT + 1
 pygame.time.set_timer(timer_spel, 1000)
 aftellen = 30
 
-#textinvoer omdat de Texvak class nog niet af is
+#simpelere maar minder flexibele textinvoer omdat de textvak class niet af is
 tekstinvoer = ""
 lettertype = pygame.font.SysFont(None,40)
 
@@ -248,10 +247,13 @@ while lekkerspelen:
             
         elif event.type == timer_spel:
             aftellen -= 1
-            if aftellen <= 0:
-                print("beurt voorbij")
+            if aftellen <= 0 and len(elkeSET([grid[i].kaart for i in range(12)])[0]) ==0 :
+                print("niksaanhethandje") #dit moest natuurlijk ingame
+                #hadden de computer dezemmoeten laten weghalen en een punt krijgen
+            else:
+                kiesSET(([grid[i].kaart for i in range(12)]))
                 aftellen = 30
-                
+        
         #hier past toetsenbord input
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
