@@ -62,8 +62,8 @@ class Kaart:
 #hier de eerst fout ingevoerde kaarten en het werk om ze daadwerkelijk tot de bruikbare class te maken, om te laten zien dat we niet op onze reet hebben gezeten mocht het niet afkomen
 kaart_eigenschappen = {
         'greendiamondempty1.gif': (0,0,0,0), 'greendiamondempty2.gif':(1,0,0,0), 'greendiamondempty3.gif': (2,0,0,0), 'greendiamondfilled1.gif': (0,0,0,1), 'greendiamondfilled2.gif': (1,0,0,1), 'greendiamondfilled3.gif': (2,0,0,1), 'greendiamondshaded1.gif': (0,0,0,2), 'greendiamondshaded2.gif': (1,0,0,2), 'greendiamondshaded3.gif': (2,0,0,2), 'greenovalempty1.gif': (0,1,0,0), 'greenovalempty2.gif': (1,1,0,0), 'greenovalempty3.gif': (2,1,0,0), 'greenovalfilled1.gif': (0,1,0,1), 'greenovalfilled2.gif': (1,1,0,1), 'greenovalfilled3.gif': (2,1,0,1), 'greenovalshaded1.gif': (0,1,0,2), 'greenovalshaded2.gif': (1,1,0,2), 'greenovalshaded3.gif': (2,1,0,2), 'greensquiggleempty1.gif': (0,2,0,0), 'greensquiggleempty2.gif': (1,2,0,0), 'greensquiggleempty3.gif': (2,2,0,0), 'greensquigglefilled1.gif': (0,2,0,1), 'greensquigglefilled2.gif': (1,2,0,1), 'greensquigglefilled3.gif': (2,2,0,1), 'greensquiggleshaded1.gif': (0,2,0,2), 'greensquiggleshaded2.gif': (1,2,0,2), 'greensquiggleshaded3.gif': (2,2,0,2),
-        'purplediamondempty1.gif': (0,0,1,0), 'purplediamondempty2.gif': (1,0,1,0), 'purplediamondempty3.gif': (2,0,1,0), 'purplediamondfilled1.gif': (0,0,1,1), 'purplediamondfilled2.gif': (1,0,1,1), 'purplediamondfilled3.gif': (2,0,1,1), 'purplediamondshaded1.gif': (0,0,1,2), 'purplediamondshaded2.gif': (1,0,1,2), 'purplediamondshaded3.gif': (2,0,1,2), 'purpleovalempty1.gif': (0,1,1,0), 'purpleovalempty2.gif': (1,1,1,0), 'purpleovalempty3.gif': (2,1,1,0), 'purpleovalfilled1.gif': (0,1,1,1), 'purpleovalfilled2.gif': (1,1,1,1), 'purpleovalfilled3.gif': (2,1,1,1), 'purpleovalshaded1.gif': (0,1,1,2), 'purpleovalshaded2.gif': (1,1,1,2), 'purpleovalshaded3.gif': (2,1,1,2), 'purplesquiggleempty1.gif': (0,2,1,0), 'purplesquiggleempty2.gif': (1,2,1,0), 'purplesquiggleempty3.gif': (2,2,1,0), 'purplesquigglefilled1.gif': (0,2,1,1), 'purplesquigglefilled2.gif': (1,2,1,1), 'purplesquigglefilled3.gif': (2,2,1,1), 'purplesquiggleshaded1.gif': (0,2,1,2), 'purplesquiggleshaded2.gif': (1,2,1,2), 'purplesquiggleshaded3.gif': (2,2,1,2), 'reddiamondempty1.gif': (0,0,2,0), 'reddiamondempty2.gif': (1,0,2,0), 'reddiamondempty3.gif': (2,0,2,0), 'reddiamondfilled1.gif': (0,0,2,1), 'reddiamondfilled2.gif': (1,0,2,1), 'reddiamondfilled3.gif': (2,0,2,1), 'reddiamondshaded1.gif': (0,0,2,2), 'reddiamondshaded2.gif': (1,0,2,2), 'reddiamondshaded3.gif': (2,0,2,2), 'redovalempty1.gif': (0,1,2,0), 'redovalempty2.gif': (1,1,2,0), 'redovalempty3.gif': (2,1,2,0), 'redovalfilled1.gif': (0,1,2,1), 'redovalfilled2.gif': (1,1,2,1), 'redovalfilled3.gif': (2,1,2,1), 'redovalshaded1.gif': (0,1,2,2), 'redovalshaded2.gif': (1,1,2,2), 'redovalshaded3.gif': (2,1,2,2),
-        'redsquiggleempty1.gif': (0,2,2,0), 'redsquiggleempty2.gif': (1,2,2,0), 'redsquiggleempty3.gif': (2,2,2,0), 'redsquigglefilled1.gif': (0,2,2,1), 'redsquigglefilled2.gif': (1,2,2,1), 'redsquigglefilled3.gif': (2,2,2,1), 'redsquiggleshaded1.gif': (0,2,2,2), 'redsquiggleshaded2.gif': (1,2,2,2), 'redsquiggleshaded3.gif': (2,2,2,2)}
+        'purplediamondempty1.gif': (0,0,1,0), 'purplediamondempty2.gif': (1,0,1,0), 'purplediamondempty3.gif': (2,0,1,0), 'purplediamondfilled1.gif': (0,0,1,1), 'purplediamondfilled2.gif': (1,0,1,1), 'purplediamondfilled3.gif': (2,0,1,1), 'purplediamondshaded1.gif': (0,0,1,2), 'purplediamondshaded2.gif': (1,0,1,2), 'purplediamondshaded3.gif': (2,0,1,2), 'purpleovalempty1.gif': (0,1,1,0), 'purpleovalempty2.gif': (1,1,1,0), 'purpleovalempty3.gif': (2,1,1,0), 'purpleovalfilled1.gif': (0,1,1,1), 'purpleovalfilled2.gif': (1,1,1,1), 'purpleovalfilled3.gif': (2,1,1,1), 'purpleovalshaded1.gif': (0,1,1,2), 'purpleovalshaded2.gif': (1,1,1,2), 'purpleovalshaded3.gif': (2,1,1,2), 'purplesquiggleempty1.gif': (0,2,1,0), 'purplesquiggleempty2.gif': (1,2,1,0), 'purplesquiggleempty3.gif': (2,2,1,0), 'purplesquigglefilled1.gif': (0,2,1,1), 'purplesquigglefilled2.gif': (1,2,1,1), 'purplesquigglefilled3.gif': (2,2,1,1), 'purplesquiggleshaded1.gif': (0,2,1,2), 'purplesquiggleshaded2.gif': (1,2,1,2), 'purplesquiggleshaded3.gif': (2,2,1,2), 
+        'reddiamondempty1.gif': (0,0,2,0), 'reddiamondempty2.gif': (1,0,2,0), 'reddiamondempty3.gif': (2,0,2,0), 'reddiamondfilled1.gif': (0,0,2,1), 'reddiamondfilled2.gif': (1,0,2,1), 'reddiamondfilled3.gif': (2,0,2,1), 'reddiamondshaded1.gif': (0,0,2,2), 'reddiamondshaded2.gif': (1,0,2,2), 'reddiamondshaded3.gif': (2,0,2,2), 'redovalempty1.gif': (0,1,2,0), 'redovalempty2.gif': (1,1,2,0), 'redovalempty3.gif': (2,1,2,0), 'redovalfilled1.gif': (0,1,2,1), 'redovalfilled2.gif': (1,1,2,1), 'redovalfilled3.gif': (2,1,2,1), 'redovalshaded1.gif': (0,1,2,2), 'redovalshaded2.gif': (1,1,2,2), 'redovalshaded3.gif': (2,1,2,2), 'redsquiggleempty1.gif': (0,2,2,0), 'redsquiggleempty2.gif': (1,2,2,0), 'redsquiggleempty3.gif': (2,2,2,0), 'redsquigglefilled1.gif': (0,2,2,1), 'redsquigglefilled2.gif': (1,2,2,1), 'redsquigglefilled3.gif': (2,2,2,1), 'redsquiggleshaded1.gif': (0,2,2,2), 'redsquiggleshaded2.gif': (1,2,2,2), 'redsquiggleshaded3.gif': (2,2,2,2)}
 
 def en_nu_goed_om(boek):
     kaartmitplaatje = {}
@@ -119,7 +119,7 @@ def elkeSET(kaarten):
     #       met de 3e t/m laatste -
     #   3e - en
     #       met de 4e t/m laatste -
-    #   ...pygame.image.load('C:\\Users\\yunus\\Downloads\\kaarten\\kaarten\\greendiamondempty1.gif')
+    #   ...
     #   1 na laatste - en
     #       met de laatste - t/m laatste -
     #2e kaart met de...
@@ -150,7 +150,7 @@ def kiesSET(kaarten):
         r = rndm(0,n)
         a, b = SETs[r], showSETs[r]
         return a, b
-    
+
 """(dit nu niet nodig maar wel fundamenteel om bij de hand te hebben)
 #test of alle kaarten het doen met een willekeurige shuffle van het deck
 kaartgoed, kaartalternatief, kaartlijst, alterlijst = en_nu_goed_om(kaart_eigenschappen)
@@ -163,28 +163,41 @@ for i in range(len(keesbaarantwoord)):
     a, b, c = keesbaarantwoord[i]
     print(" {} \n {} \n {} \n ...".format(a, b, c))"""
 
+class Timer:
+    def __init__(self,scherm,font_grootte = 30,positie=(25,650)):
+        self.scherm = scherm
+        self.positie = positie
+        self.font = pygame.font.Font(None,font_grootte)
+    
+    def teken(self,tijd_over):
+        tijd_tekst = self.font.render(f"tijd over {tijd_over}", True, (139,0,0))
+        self.scherm.blit(tijd_tekst, self.positie)
 #zo kan de module starten met shit doen
 pygame.init()
 
-#Resolutie van het spelscherm
+#Resulotie van het spel
 breed, hoog = 1280, 720
 scherm = pygame.display.set_mode((breed, hoog))
 
 #voor willekeurige achtergrond kleur zonder epilepsie te krijgen moet dit buiten de running loop
 r0, g0, b0 = rndm(1,16), rndm(1,16), rndm(1,16)
 
+
+#verander door middel van ctrl + f alle yunus namen naar je eigen naam en zet de bestand van de fotos van kaarten in een map in downloads genaamd kaarten en daarin nog een map genaamd kaarten en dan kan jij ze ook gebruiken
+
 #het onderstaande verwijdert de meest oogverblindende kleuren
 def goedgekleurd(r,g,b):
     if (((r == g == 14 or r == b == 14 or g == b == 14) == False) and
-    ((r > 14 or g >14  or b > 14) and (22 > r+g+b or r+g+b >28)) == False):
+    ((r > 14 or g >14  or b > 14) and (22 > r+g+b or r+g+b > 30)) == False):
             return True
-        
+
 while goedgekleurd(r0, g0, b0) != True:
     r0, g0, b0 = rndm(1,16), rndm(1,16), rndm(1,16)
 
 rd, gr, bl = r0**2 - 1, g0**2 - 1, b0**2 - 1
+
 #zo zijn de dummyrechthoeken waar de kaarten op komen altijd zichtbaar
-(rd1, gr1, bl1) = (255 - rd), (255 - gr), (255 - bl)
+rd1, gr1, bl1 = (255 - rd), (255 - gr), (255 - bl)
 
 #gebruik één van de twee dict/lijstcombos
 kaartdict, altdict, kaartlijst, altlijst = en_nu_goed_om(kaart_eigenschappen)
@@ -214,7 +227,12 @@ class Grid(pygame.sprite.Sprite):
 
         
 grid = [Grid(i, (rd1, gr1, bl1)) for i in range(12)]
+timer = Timer(scherm, positie=(25,650))
+timer_spel = pygame.USEREVENT + 1
+pygame.time.set_timer(timer_spel, 1000)
+aftellen = 30
 
+spel = True
 #start het spel
 lekkerspelen = True
 while lekkerspelen:
@@ -228,23 +246,36 @@ while lekkerspelen:
         #sluit het spel 
         elif event.type == pygame.QUIT:
             lekkerspelen = False
+            spel = False
+        else:
+            if event.type == timer_spel:
+                aftellen -= 1
+                if aftellen <= 0:
+                    print("beurt voorbij")
+                    aftellen = 30
     #hier kan ook toetsenbord input
     toetsinvoer = pygame.key.get_pressed()
     
     
     #achtergrond kleur
-    #rd, gr, bl = 5, 13, 3 #voor mooi groene kleur, aangezien dit er één is kan het wel hier
+    #a, b, c = 5, 13, 3 #voor mooi groene kleur, aangezien dit er één is kan het wel hier
     scherm.fill(((rd, gr, bl)))
     
+    timer.teken(aftellen)
+
     for n in range(len(grid)):
         scherm.blit(grid[n].plaatje, grid[n].plek)
     #zonder deze line zie je niets
     pygame.display.flip()
 
+    
+    #zonder deze line zie je niets
+    pygame.display.flip()
 
+
+    
 #deze om pygame.init weer af te sluiten
 pygame.quit()
-
 
 
 
