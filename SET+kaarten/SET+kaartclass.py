@@ -49,16 +49,6 @@ class Kaart:
         return "|{self.nummer}, {self.symbool}, {self.kleur}, {self.shading}|".format(self=self)
     #we kunnen mogelijk "==" betekenis geven voor onze class om de vergelijkfunctie wat eleganter te maken,
 
-#hier de handingevoerde kaarten en het werk om ze daadwerkelijk tot de bruikbare class te maken, om te laten zien dat we niet op onze reet hebben gezeten mocht het niet afkomen
-class Kaart:
-    def __init__(self, nummer, symbool, kleur, shading):
-        self.nummer, self.symbool, self.kleur, self.shading = nummer, symbool, kleur, shading    
-    def __str__(self):
-        return "|{self.nummer}, {self.symbool}, {self.kleur}, {self.shading}|".format(self=self)
-    def __repr__(self):
-        return "|{self.nummer}, {self.symbool}, {self.kleur}, {self.shading}|".format(self=self)
-    #we kunnen mogelijk "==" betekenis geven voor onze class om de vergelijkfunctie wat eleganter te maken,
-
 #hier de eerst fout ingevoerde kaarten en het werk om ze daadwerkelijk tot de bruikbare class te maken, om te laten zien dat we niet op onze reet hebben gezeten mocht het niet afkomen
 kaart_eigenschappen = {
         'greendiamondempty1.gif': (0,0,0,0), 'greendiamondempty2.gif':(1,0,0,0), 'greendiamondempty3.gif': (2,0,0,0), 'greendiamondfilled1.gif': (0,0,0,1), 'greendiamondfilled2.gif': (1,0,0,1), 'greendiamondfilled3.gif': (2,0,0,1), 'greendiamondshaded1.gif': (0,0,0,2), 'greendiamondshaded2.gif': (1,0,0,2), 'greendiamondshaded3.gif': (2,0,0,2), 'greenovalempty1.gif': (0,1,0,0), 'greenovalempty2.gif': (1,1,0,0), 'greenovalempty3.gif': (2,1,0,0), 'greenovalfilled1.gif': (0,1,0,1), 'greenovalfilled2.gif': (1,1,0,1), 'greenovalfilled3.gif': (2,1,0,1), 'greenovalshaded1.gif': (0,1,0,2), 'greenovalshaded2.gif': (1,1,0,2), 'greenovalshaded3.gif': (2,1,0,2), 'greensquiggleempty1.gif': (0,2,0,0), 'greensquiggleempty2.gif': (1,2,0,0), 'greensquiggleempty3.gif': (2,2,0,0), 'greensquigglefilled1.gif': (0,2,0,1), 'greensquigglefilled2.gif': (1,2,0,1), 'greensquigglefilled3.gif': (2,2,0,1), 'greensquiggleshaded1.gif': (0,2,0,2), 'greensquiggleshaded2.gif': (1,2,0,2), 'greensquiggleshaded3.gif': (2,2,0,2),
@@ -151,18 +141,27 @@ def kiesSET(kaarten):
         a, b = SETs[r], showSETs[r]
         return a, b
     
-"""(dit nu niet nodig maar wel fundamenteel om bij de hand te hebben)
-#test of alle kaarten het doen met een willekeurige shuffle van het deck
-kaartgoed, kaartalternatief, kaartlijst, alterlijst = en_nu_goed_om(kaart_eigenschappen)
-#je kan ook "kaartlijst" gebruiken
 
-testkaartm = [alterlijst[i] for i in range(81)]
-shuffle(testkaartm)
-jnfo, keesbaarantwoord = elkeSET(testkaartm[:12])
-for i in range(len(keesbaarantwoord)):
-    a, b, c = keesbaarantwoord[i]
-    print(" {} \n {} \n {} \n ...".format(a, b, c))"""
+class Timer:
+    def __init__(self,scherm, duur =30, font_grootte = 30,positie=(1100,100)):
+        self.scherm = scherm
+        self.duur = duur
+        self.tijd_over = duur
+        self.positie = positie
+        self.font = pygame.font.Font(None,font_grootte)
 
+    def reset(self):
+        self.tijd_over = self.duur
+    
+    def update(self):
+        self.tijd_over -= 1
+        if self.tijd_over <= 0:
+            self.reset()
+    
+    def teken(self,tijd_over):
+        tijd_tekst = self.font.render(f"tijd over {tijd_over}", True, (139,0,0))
+        self.scherm.blit(tijd_tekst, self.positie)
+        
 #zo kan de module starten met shit doen
 pygame.init()
 
@@ -189,6 +188,7 @@ rd, gr, bl = r0**2 - 1, g0**2 - 1, b0**2 - 1
 #gebruik één van de twee dict/lijstcombos
 kaartdict, altdict, kaartlijst, altlijst = en_nu_goed_om(kaart_eigenschappen)
 
+
 #ons probeersel om de kaart class van eerder op het spelbord te krijgen
 class Grid(pygame.sprite.Sprite):
     def __init__(self, positie, kleur):
@@ -197,44 +197,118 @@ class Grid(pygame.sprite.Sprite):
         self.positie = positie
         self.kleur = kleur
         
-        #totdat de plaatjes werken
-        #self.vlak = pygame.Surface([90, 160])
-        #self.vlak.fill(self.kleur)
-        
         self.kaart = altlijst[rndm(81)]
         
         self.plaatje = pygame.image.load(altdict[self.kaart]).convert()
         self.plaatje.set_colorkey((self.kleur), pygame.RLEACCEL)
         
-        self.plek = self.plaatje.get_rect(left=(95 + 90*self.positie)
-                                       ,top = (20 + 240*(self.positie % 3)))
-        #een self.kaart die een van de kaarten pakt?
-   
+        self.rij, self.kolom = divmod(self.positie, 4)
+            
+        self.plek = self.plaatje.get_rect(left=(95 + 270*self.kolom)
+                                       ,top = (20 + 240*(self.rij)))
+        self.gekozen = False
         
-
+        
+class textinput(pygame.sprite.Sprite):
+    def __init__(self, kleur):
+        self.kleur = kleur
+        
+        self.vlak = pygame.Surface([100, 100])
+        self.vlak.fill(self.kleur)
+        self.plek = self.vlak.get_rect(right= 20, top = 20)
+        self.font = pygame.font.SysFont(None,120)
+        self.text = ""
+        
+        def maak(self, scherm):
+            scherm.blit(self.tekst, (self.plek))
+            pygame.draw.Rect(self.scherm, self.kleur, self.plek)
         
 grid = [Grid(i, (rd1, gr1, bl1)) for i in range(12)]
 
+lijst = []
+for i in range(12):
+    lijst.append(grid[i].kaart)
+print(elkeSET(lijst))
+
+#timer
+timer = Timer(scherm, positie=(1100,100))
+timer_spel = pygame.USEREVENT + 1
+pygame.time.set_timer(timer_spel, 1000)
+
+
+#textinvoer omdat de Texvak class nog niet af is
+tekstinvoer = ""
+lettertype = pygame.font.SysFont(None,40)
+
+
+#spel = True #waarom moet deze erbij @Yunus?
+
 #start het spel
 lekkerspelen = True
-while lekkerspelen:
 
+puntenpc = 0
+puntenspeler = 0
+while lekkerspelen:
     #events
     for event in pygame.event.get():
-        #hier kan mogelijk toetsenbord input
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_ESCAPE:
-                lekkerspelen == False
-        #sluit het spel 
-        elif event.type == pygame.QUIT:
+        #sluit het spel
+        if event.type == pygame.QUIT:
             lekkerspelen = False
-    #hier kan ook toetsenbord input
-    toetsinvoer = pygame.key.get_pressed()
+            spel = False
+            
+        elif event.type == timer_spel:
+            timer.update()
+            if timer.tijd_over <= 0:
+                print("beurt voorbij")
+                timer.update = timer.duur
+                
+        #hier past toetsenbord input
+        elif event.type == pygame.KEYDOWN:
+             if event.key == pygame.K_UP:
+                timer.duur = 15  #druk op arrow key up zodat timer 15 sec is
+                timer.reset()
+             elif event.key == pygame.K_DOWN:
+                timer.duur = 30  #druk op arrow key down zodat timer 30 sec is
+                timer.reset()
+             elif event.key == pygame.K_LEFT:
+                timer.duur = 45  #druk op arrow key left zodat timer 45 sec is
+                timer.reset()
+             if event.key == pygame.K_ESCAPE:
+                lekkerspelen == False
+            #onderstaande zorgt ervoor dat backspace, tekst, spatie en enter intuitief werken voor tekstinvoer
+             elif event.key == pygame.K_BACKSPACE:
+                tekstinvoer = tekstinvoer[:-1]
+             else:
+                tekstinvoer += event.unicode
+                if event.key == pygame.K_RETURN:
+                    a, b, c = tekstinvoer.split()
+                    a, b, c = int(a), int(b), int(c)
+                    if verglijk(grid[a].kaart, grid[b].kaart, grid[c].kaart):
+                        tekstinvoer = "lekkerbezig"
+            
+#helaas heb ik heel veel code die veel smoother was niet goed geimplementeerd gekregen
+        """if event.key == pygame.K_BACKSPACE:
+            if event.key == pygame.K_DELETE:
+                for i in range(3):
+                    a = grid[i].kaart
+                    while a == grid[i].kaart:                             a = altlijst[rndm(81)]
+                    grid[i].kaart = a
+                puntenpc += 1
+                #teller = 0
+                setje = []
+                pygame.event.clear"""
+            
+    
     
     
     #achtergrond kleur
     #rd, gr, bl = 5, 13, 3 #voor mooi groene kleur, aangezien dit er één is kan het wel hier
     scherm.fill(((rd, gr, bl)))
+    
+    textvlak = lettertype.render(tekstinvoer,True, (rd1, gr1, bl1))
+    scherm.blit(textvlak,(1100, 50))
+    
+    timer.teken(timer.tijd_over)
     
     for n in range(len(grid)):
         scherm.blit(grid[n].plaatje, grid[n].plek)
@@ -244,7 +318,6 @@ while lekkerspelen:
 
 #deze om pygame.init weer af te sluiten
 pygame.quit()
-
 
 
 
