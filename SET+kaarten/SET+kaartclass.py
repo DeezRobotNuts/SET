@@ -97,26 +97,10 @@ def elkeSET(kaarten):
     #SETs onthoudt de plek van een SET, showSETs de kaarten zelf om dingen te testen
     SETs = {}
     showSETs ={}
-    #het algoritme werkt voor n != 12, maar de tijdscomplexiteit van dit algoritme is O(n^3), het is namelijk een 3-dimensionaal driehoeksgetal (pyramidegetal?):
-    #dus mochten we supercomputers ooit tegen elkaar willen laten spelen met gigantisch veel kaarten met gigantisch veel eigenschappen (n <= 3^4 = 81 kan zo n <= 6^9 ~ 10E7 worden als je er geen jpg's aan hoeft te koppelen)
-    #moeten  we misschien iets beters bedenken
+  
     n = len(kaarten)
     teller = 0
-    #(dit kan misschien beter los in het verslag samen met mijn handgeschreven versie, maar voor jou @Yunus zet ik hier wat de tripel for loop doet):
-    #vergelijk de:
-    #1ste kaart met de
-    #   2e - en
-    #       met de 3e t/m laatste -
-    #   3e - en
-    #       met de 4e t/m laatste -
-    #   ...pygame.image.load('C:\\Users\\yunus\\Downloads\\kaarten\\kaarten\\greendiamondempty1.gif')
-    #   1 na laatste - en
-    #       met de laatste - t/m laatste -
-    #2e kaart met de...
-    #...
-    #2 na laatste - met de
-    #   1 na laatste - en
-    #       met de laatste - t/m laatste -
+
     for i in range(0, n-2):
         for j in range(i+1, n-1):
             for k in range(j+1, n):
