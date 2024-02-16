@@ -50,10 +50,6 @@ class Kaart:
     #we kunnen mogelijk "==" betekenis geven voor onze class om de vergelijkfunctie wat eleganter te maken,
 
 #hier de eerst fout ingevoerde kaarten en het werk om ze daadwerkelijk tot de bruikbare class te maken, om te laten zien dat we niet op onze reet hebben gezeten mocht het niet afkomen
-kaart_eigenschappen = {
-        'greendiamondempty1.gif': (0,0,0,0), 'greendiamondempty2.gif':(1,0,0,0), 'greendiamondempty3.gif': (2,0,0,0), 'greendiamondfilled1.gif': (0,0,0,1), 'greendiamondfilled2.gif': (1,0,0,1), 'greendiamondfilled3.gif': (2,0,0,1), 'greendiamondshaded1.gif': (0,0,0,2), 'greendiamondshaded2.gif': (1,0,0,2), 'greendiamondshaded3.gif': (2,0,0,2), 'greenovalempty1.gif': (0,1,0,0), 'greenovalempty2.gif': (1,1,0,0), 'greenovalempty3.gif': (2,1,0,0), 'greenovalfilled1.gif': (0,1,0,1), 'greenovalfilled2.gif': (1,1,0,1), 'greenovalfilled3.gif': (2,1,0,1), 'greenovalshaded1.gif': (0,1,0,2), 'greenovalshaded2.gif': (1,1,0,2), 'greenovalshaded3.gif': (2,1,0,2), 'greensquiggleempty1.gif': (0,2,0,0), 'greensquiggleempty2.gif': (1,2,0,0), 'greensquiggleempty3.gif': (2,2,0,0), 'greensquigglefilled1.gif': (0,2,0,1), 'greensquigglefilled2.gif': (1,2,0,1), 'greensquigglefilled3.gif': (2,2,0,1), 'greensquiggleshaded1.gif': (0,2,0,2), 'greensquiggleshaded2.gif': (1,2,0,2), 'greensquiggleshaded3.gif': (2,2,0,2),
-        'purplediamondempty1.gif': (0,0,1,0), 'purplediamondempty2.gif': (1,0,1,0), 'purplediamondempty3.gif': (2,0,1,0), 'purplediamondfilled1.gif': (0,0,1,1), 'purplediamondfilled2.gif': (1,0,1,1), 'purplediamondfilled3.gif': (2,0,1,1), 'purplediamondshaded1.gif': (0,0,1,2), 'purplediamondshaded2.gif': (1,0,1,2), 'purplediamondshaded3.gif': (2,0,1,2), 'purpleovalempty1.gif': (0,1,1,0), 'purpleovalempty2.gif': (1,1,1,0), 'purpleovalempty3.gif': (2,1,1,0), 'purpleovalfilled1.gif': (0,1,1,1), 'purpleovalfilled2.gif': (1,1,1,1), 'purpleovalfilled3.gif': (2,1,1,1), 'purpleovalshaded1.gif': (0,1,1,2), 'purpleovalshaded2.gif': (1,1,1,2), 'purpleovalshaded3.gif': (2,1,1,2), 'purplesquiggleempty1.gif': (0,2,1,0), 'purplesquiggleempty2.gif': (1,2,1,0), 'purplesquiggleempty3.gif': (2,2,1,0), 'purplesquigglefilled1.gif': (0,2,1,1), 'purplesquigglefilled2.gif': (1,2,1,1), 'purplesquigglefilled3.gif': (2,2,1,1), 'purplesquiggleshaded1.gif': (0,2,1,2), 'purplesquiggleshaded2.gif': (1,2,1,2), 'purplesquiggleshaded3.gif': (2,2,1,2), 'reddiamondempty1.gif': (0,0,2,0), 'reddiamondempty2.gif': (1,0,2,0), 'reddiamondempty3.gif': (2,0,2,0), 'reddiamondfilled1.gif': (0,0,2,1), 'reddiamondfilled2.gif': (1,0,2,1), 'reddiamondfilled3.gif': (2,0,2,1), 'reddiamondshaded1.gif': (0,0,2,2), 'reddiamondshaded2.gif': (1,0,2,2), 'reddiamondshaded3.gif': (2,0,2,2), 'redovalempty1.gif': (0,1,2,0), 'redovalempty2.gif': (1,1,2,0), 'redovalempty3.gif': (2,1,2,0), 'redovalfilled1.gif': (0,1,2,1), 'redovalfilled2.gif': (1,1,2,1), 'redovalfilled3.gif': (2,1,2,1), 'redovalshaded1.gif': (0,1,2,2), 'redovalshaded2.gif': (1,1,2,2), 'redovalshaded3.gif': (2,1,2,2),
-        'redsquiggleempty1.gif': (0,2,2,0), 'redsquiggleempty2.gif': (1,2,2,0), 'redsquiggleempty3.gif': (2,2,2,0), 'redsquigglefilled1.gif': (0,2,2,1), 'redsquigglefilled2.gif': (1,2,2,1), 'redsquigglefilled3.gif': (2,2,2,1), 'redsquiggleshaded1.gif': (0,2,2,2), 'redsquiggleshaded2.gif': (1,2,2,2), 'redsquiggleshaded3.gif': (2,2,2,2)}
 
 def en_nu_goed_om(boek):
     kaartmitplaatje = {}
@@ -159,12 +155,14 @@ class Timer:
             self.reset()
     
     def teken(self,tijd_over):
-        tijd_tekst = self.font.render(f"tijd over {tijd_over}", True, (139,0,0))
+        tijd_tekst = self.font.render(f"tijd over {tijd_over}", True, (rd1,gr1,bl1))
         self.scherm.blit(tijd_tekst, self.positie)
         
 #zo kan de module starten met shit doen
 pygame.init()
-
+pygame.font.init()
+random_font = pygame.font.SysFont(None, 30)
+zwarte_font = pygame.font.SysFont(None, 30)
 #Resolutie van het spelscherm
 breed, hoog = 1280, 720
 scherm = pygame.display.set_mode((breed, hoog))
@@ -273,8 +271,14 @@ while lekkerspelen:
              elif event.key == pygame.K_LEFT:
                 timer.duur = 45  #druk op arrow key left zodat timer 45 sec is
                 timer.reset()
-             if event.key == pygame.K_ESCAPE:
+             elif event.key == pygame.K_ESCAPE:
                 lekkerspelen == False
+             elif event.key == pygame.K_RSHIFT:
+                 puntenspeler += 1
+                 #als je op right shift drukt krijgt speler 1 punt.
+             elif event.key == pygame.K_RCTRL:
+                 puntenpc += 1
+                 #als je op right ctrl drukt krijgt de pc 1 punt.
             #onderstaande zorgt ervoor dat backspace, tekst, spatie en enter intuitief werken voor tekstinvoer
              elif event.key == pygame.K_BACKSPACE:
                 tekstinvoer = tekstinvoer[:-1]
@@ -303,7 +307,40 @@ while lekkerspelen:
     
     #achtergrond kleur
     #rd, gr, bl = 5, 13, 3 #voor mooi groene kleur, aangezien dit er één is kan het wel hier
+    
     scherm.fill(((rd, gr, bl)))
+    
+    kaart1 = zwarte_font.render(f'->1', True, (rd1,gr1,bl1))
+    scherm.blit(kaart1, (200,100))
+    kaart2 = zwarte_font.render(f'->2', True, (rd1,gr1,bl1))
+    scherm.blit(kaart2, (475,100))
+    kaart3 = zwarte_font.render(f'->3', True, (rd1,gr1,bl1))
+    scherm.blit(kaart3, (750,100))
+    kaart4 = zwarte_font.render(f'->4', True, (rd1,gr1,bl1))
+    scherm.blit(kaart4, (1025,100))
+    kaart5 = zwarte_font.render(f'->5', True, (rd1,gr1,bl1))
+    scherm.blit(kaart5, (200,350))
+    kaart6 = zwarte_font.render(f'->6', True, (rd1,gr1,bl1))
+    scherm.blit(kaart6, (475,350))
+    kaart7 = zwarte_font.render(f'->7', True, (rd1,gr1,bl1))
+    scherm.blit(kaart7, (750,350))
+    kaart8 = zwarte_font.render(f'->8', True, (rd1,gr1,bl1))
+    scherm.blit(kaart8, (1025,350))
+    kaart9 = zwarte_font.render(f'->9', True, (rd1,gr1,bl1))
+    scherm.blit(kaart9, (200,585))
+    kaart10 = zwarte_font.render(f'->10', True, (rd1,gr1,bl1))
+    scherm.blit(kaart10, (475,585))
+    kaart11 = zwarte_font.render(f'->11', True, (rd1,gr1,bl1))
+    scherm.blit(kaart11, (750,585))
+    kaart12 = zwarte_font.render(f'->12', True, (rd1,gr1,bl1))
+    scherm.blit(kaart12, (1025,585))
+    
+    
+    tekst_score_speler = random_font.render(f'speler punten: {puntenspeler}', True, (rd1, gr1, bl1))
+    scherm.blit(tekst_score_speler, (1100, 150))
+    
+    tekst_score_pc = random_font.render(f'pc punten: {puntenpc}', True, (rd1, gr1, bl1))
+    scherm.blit(tekst_score_pc, (1100, 200))
     
     textvlak = lettertype.render(tekstinvoer,True, (rd1, gr1, bl1))
     scherm.blit(textvlak,(1100, 50))
